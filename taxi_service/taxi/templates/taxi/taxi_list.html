@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доступні таксі</title>
+</head>
+<body>
+    <h1>Доступні таксі</h1>
+    <ul>
+        {% for taxi in taxis %}
+            <li>{{ taxi.make }} {{ taxi.model }} ({{ taxi.license_plate }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
