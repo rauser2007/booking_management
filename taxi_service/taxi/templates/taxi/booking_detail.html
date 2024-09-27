@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі бронювання</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Деталі бронювання</h1>
+        <div class="card">
+            <div class="card-header">
+                Бронювання #{{ booking.id }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Клієнт: {{ booking.customer.first_name }} {{ booking.customer.last_name }}</h5>
+                <p class="card-text"><strong>Поїздка:</strong> {{ booking.ride.start_address }} до {{ booking.ride.end_address }}</p>
+                <p class="card-text"><strong>Час початку:</strong> {{ booking.start_datetime }}</p>
+                <p class="card-text"><strong>Час завершення:</strong> {{ booking.end_datetime }}</p>
+                <p class="card-text"><strong>Статус:</strong> {{ booking.status }}</p>
+                <p class="card-text"><strong>Місце початку поїздки:</strong> {{ booking.pickup_location }}</p>
+                <p class="card-text"><strong>Місце закінчення поїздки:</strong> {{ booking.dropoff_location }}</p>
+                <p class="card-text"><strong>Таксі:</strong> {{ booking.taxi.make }} {{ booking.taxi.model }} ({{ booking.taxi.license_plate }})</p>
+                <a href="{% url 'edit_booking' booking.id %}" class="btn btn-warning">Редагувати</a>
+                <a href="{% url 'delete_booking' booking.id %}" class="btn btn-danger">Видалити</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

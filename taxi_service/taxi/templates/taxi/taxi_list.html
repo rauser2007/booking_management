@@ -3,14 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Доступні таксі</title>
+    <title>Список таксі</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Доступні таксі</h1>
-    <ul>
-        {% for taxi in taxis %}
-            <li>{{ taxi.make }} {{ taxi.model }} ({{ taxi.license_plate }})</li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-5">
+        <h1 class="mb-4">Доступні таксі</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Марка</th>
+                    <th>Модель</th>
+                    <th>Номерний знак</th>
+                    <th>Рік</th>
+                    <th>Колір</th>
+                    <th>Водій</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for taxi in taxis %}
+                <tr>
+                    <td>{{ taxi.make }}</td>
+                    <td>{{ taxi.model }}</td>
+                    <td>{{ taxi.license_plate }}</td>
+                    <td>{{ taxi.year }}</td>
+                    <td>{{ taxi.color }}</td>
+                    <td>{{ taxi.driver.first_name }} {{ taxi.driver.last_name }}</td>
+                    <td>
+                        <a href="{% url 'taxi_detail' taxi.id %}" class="btn btn-info btn-sm">Деталі</a>
+                        <a href="{% url 'create_booking' %}?taxi={{ taxi.id }}" class="btn btn-primary btn-sm">Забронювати</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
