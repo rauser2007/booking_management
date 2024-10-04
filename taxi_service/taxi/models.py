@@ -35,7 +35,7 @@ class Ride(models.Model):
         return f"Ride from {self.start_address} to {self.end_address}"
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField('registration.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
@@ -49,10 +49,10 @@ class Booking(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     ride = models.ForeignKey(Ride, on_delete=models.CASCADE)
     booking_time = models.DateTimeField(auto_now_add=True)
-    start_datetime = models.DateTimeField()  # Час початку бронювання
-    end_datetime = models.DateTimeField()  # Час завершення бронювання
-    pickup_location = models.CharField(max_length=255)  # Місце початку поїздки
-    dropoff_location = models.CharField(max_length=255)  # Місце закінчення поїздки
+    start_datetime = models.DateTimeField(blank=True,null=True)  # Час початку бронювання
+    end_datetime = models.DateTimeField(blank=True,null=True)  # Час завершення бронювання
+    pickup_location = models.CharField(max_length=255, blank=True,null=True)  # Місце початку поїздки
+    dropoff_location = models.CharField(max_length=255, blank=True,null=True)  # Місце закінчення поїздки
     taxi = models.ForeignKey(Vehicle, on_delete=models.CASCADE)  # Зв'язок з транспортом (таксі)
     status = models.CharField(max_length=20, choices=[('Completed', 'Completed'), ('Pending', 'Pending'), ('Canceled', 'Canceled')])
 
