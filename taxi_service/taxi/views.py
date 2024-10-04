@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BookingForm
 from django.contrib.auth.decorators import login_required
 from .models import Vehicle
@@ -33,3 +33,20 @@ def booking_detail(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, customer__user=request.user)
     return render(request, 'taxi/booking_detail.html', {'booking': booking})
 
+def edit_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            return redirect('user_bookings')
+    else:
+        form = BookingForm(instance=booking)
+    return render(request, 'taxi/edit_booking.html', {'form': form})
+
+def delete_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.method == 'POST':
+        booking.delete()
+        return redirect('user_bookings')
+    return render(request, 'delete_booking.html', {'booking': booking})

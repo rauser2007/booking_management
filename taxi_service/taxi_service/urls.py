@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('taxi/', include('taxi.urls')),  # Включаємо URL-шляхи з додатку taxi
     path('accounts/', include('django.contrib.auth.urls')),  # Включаємо стандартні URL-шляхи для аутентифікації
+    path('book/', views.book_view, name='book'),
 ]

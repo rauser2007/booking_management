@@ -1,0 +1,7 @@
+<h2>Видалити бронювання</h2>
+<p>Ви впевнені, що хочете видалити це бронювання?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Так, видалити</button>
+    <a href="{% url 'user_bookings' %}">Скасувати</a>
+</form>
