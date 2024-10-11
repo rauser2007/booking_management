@@ -53,7 +53,7 @@ class Booking(models.Model):
     end_datetime = models.DateTimeField(blank=True,null=True)  # Час завершення бронювання
     pickup_location = models.CharField(max_length=255, blank=True,null=True)  # Місце початку поїздки
     dropoff_location = models.CharField(max_length=255, blank=True,null=True)  # Місце закінчення поїздки
-    taxi = models.ForeignKey(Vehicle, on_delete=models.CASCADE)  # Зв'язок з транспортом (таксі)
+    taxi = models.ForeignKey(Vehicle, on_delete=models.CASCADE, null=True, blank=True)  # Зв'язок з транспортом (таксі)
     status = models.CharField(max_length=20, choices=[('Completed', 'Completed'), ('Pending', 'Pending'), ('Canceled', 'Canceled')])
 
     def __str__(self):
@@ -65,7 +65,7 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_method = models.CharField(max_length=20, choices=[('Cash', 'Cash'), ('Card', 'Card')])
     payment_status = models.CharField(max_length=20, choices=[('Paid', 'Paid'), ('Unpaid', 'Unpaid')])
-    payment_date = models.DateTimeField(auto_now_add=True)
+    payment_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return f"Payment for {self.booking}"

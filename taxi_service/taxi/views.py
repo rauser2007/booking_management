@@ -50,3 +50,4 @@ def delete_booking(request, booking_id):
         booking.delete()
         return redirect('user_bookings')
     return render(request, 'delete_booking.html', {'booking': booking})
+
